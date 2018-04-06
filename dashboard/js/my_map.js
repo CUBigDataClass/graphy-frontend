@@ -55,6 +55,8 @@ map.fitBounds(markers.getBounds());
 map.attributionControl.addAttribution(metadata.attribution);
 renderLegend();
 
+//Adding the sidebar to map
+var sidebar = L.control.sidebar('sidebar').addTo(map);
 
 function defineFeature(feature, latlng) {
     var categoryVal = feature.properties[categoryField],

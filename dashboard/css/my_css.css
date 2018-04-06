@@ -5,4 +5,10 @@ body {
 html, body, #mapid {
     height: 100%;
     width: 100%;
+    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.lorem {
+    font-style: italic;
+    color: #AAA;
 }
