@@ -1,8 +1,10 @@
 import json
 import logging
 from flask_cors import CORS
-from flask import Flask, render_template, request, url_for
-import os
+from flask import Flask, render_template, request, url_for, Response
+import os, json
+from cassandra.cluster import Cluster
+from cassandra.cqlengine import connection
 
 PEOPLE_FOLDER = os.path.join('static', 'people_photo')
 
@@ -47,11 +49,54 @@ def show_index():
 #
 # patch_broken_pipe_error()
 
-@app.route('/random', methods=['GET','POST'])
-def show_random():
-    # full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'shovon.jpg')
+def make_geojson(rows):
+    base_dict = {'features': [{'geometry': {'coordinates': [10.846302136575284,
+                                                            59.8214648309797],
+                                            'type': 'Point'},
+                               'properties': {'5055': '2013-01-02', '5065': '4', '5074': '4'},
+                               'type': 'Feature'},
+                              {'geometry': {'coordinates': [10.844189879731648,
+                                                            59.82613401648146],
+                                            'type': 'Point'},
+                               'properties': {'5055': '2013-01-13', '5065': '4', '5074': '4'},
+                               'type': 'Feature'},
+                              {'geometry': {'coordinates': [10.865008671234968,
+                                                            59.92920757221595],
+                                            'type': 'Point'},
+                               'properties': {'5055': '2013-10-06', '5065': '4', '5074': '4'},
+                               'type': 'Feature'}],
+                 'properties': {'attribution': 'Traffic accidents: <a '
+                                               'href="http://data.norge.no/data/nasjonal-vegdatabank-api" '
+                                               'target="blank">NVDB</a>',
+                                'description': 'Traffic accidents in 2013 in Oslo, Norway',
+                                'fields': {'5055': {'name': 'Date'},
+                                           '5065': {'lookup': {'1': 'Pedestrian',
+                                                               '2': 'Bicycle',
+                                                               '3': 'Motorcycle',
+                                                               '4': 'Car'},
+                                                    'name': 'Accident type'},
+                                           '5074': {'lookup': {'1': 'Fatal',
+                                                               '2': 'Very serious injuries',
+                                                               '3': 'Serious injuries',
+                                                               '4': 'Minor injuries',
+                                                               '5': 'No injuries',
+                                                               '6': 'Not recorded'},
+                                                    'name': 'Injuries'}}},
+                 'type': 'FeatureCollection'}
 
-    return "Success"
+    pass
+
+@app.route('/all_markers', methods=['GET','POST'])
+def show_all_markers():
+    # full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'shovon.jpg')
+    cluster = Cluster()
+    session = cluster.connect('test01')
+    rows = session.execute("SELECT json * FROM Classified_Tweets")
+    result = []
+    for i in rows:
+        result.append(json.loads(i.json))
+    return Response(json.dumps(result), mimetype='application/json')
+
 
 @app.route('/color', methods=['POST'])
 def show_color():
