@@ -2,8 +2,8 @@
  * Created by shivendra on 05/04/18.
  */
 
+"use strict";
 
-//Initializing the map
 // var map = L.map('mapid').setView([40.0150, -105.2705], 13);
 //
 // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -13,15 +13,49 @@
 //     accessToken: 'pk.eyJ1IjoibGVhZmxldC10cmlhbCIsImEiOiJjajB0NDh2cW8wNWE1MzJvNWNrZGpiYnFkIn0.QeSfbOpNFdR_u4SyQSzl4A'
 // }).addTo(map);
 
+//Ajax call to get all markers
+$(document).ready(function(e) {
+    // e.preventDefault();
+    // $("#main_image").attr('src', "loading.png");
+    $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:5000/all_markers",
+        // data: {
+        //     id: $(this).val(), // < note use of 'this' here
+        //     access_token: $("#access_token").val()
+        // },
+        success: function(result) {
+            var data = result;
+            console.log('Call successful');
+
+            //Ready to go, load the geojson
+            geojson = data;
+            metadata = data.properties;
+            var markers = L.geoJson(geojson, {
+                pointToLayer: defineFeature,
+                onEachFeature: defineFeaturePopup
+            });
+            markerclusters.addLayer(markers);
+            map.fitBounds(markers.getBounds());
+            map.attributionControl.addAttribution(metadata.attribution);
+            map.setZoom(3);
+            // renderLegend();
 
 
-"use strict";
+        },
+        error: function(result) {
+            console.log("Something went wrong");
+        }
+    });
+});
+
+//Initializing the map
 var geojson,
     metadata,
-    geojsonPath = 'traffic_accidents.geojson',
+    // geojsonPath = 'traffic_accidents.geojson',
     categoryField = '5074', //This is the fieldname for marker category (used in the pie and legend)
     iconField = '5065', //This is the fieldname for marker icon
-    popupFields = ['5065','5055','5074'], //Popup will display these fields
+    popupFields = ['5056','5055','5074', '5057', '5059'], //Popup will display these fields
     tileServer = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
     tileAttribution = 'Map data: <a href="http://openstreetmap.org">OSM</a>',
     rmax = 30, //Maximum radius for cluster pies
@@ -42,19 +76,6 @@ L.tileLayer(tileServer, {
 //and the empty markercluster layer
 map.addLayer(markerclusters);
 
-//Ready to go, load the geojson
-geojson = data;
-console.log(geojson);
-metadata = data.properties;
-var markers = L.geoJson(geojson, {
-    pointToLayer: defineFeature,
-    onEachFeature: defineFeaturePopup
-});
-markerclusters.addLayer(markers);
-map.fitBounds(markers.getBounds());
-map.attributionControl.addAttribution(metadata.attribution);
-renderLegend();
-
 //Adding the sidebar to map
 var sidebar = L.control.sidebar('sidebar').addTo(map);
 
@@ -66,7 +87,7 @@ function defineFeature(feature, latlng) {
         className: myClass,
         iconSize:null
     });
-    console.log("Test");
+    // console.log("Test");
     return L.marker(latlng, {icon: myIcon});
 }
 
@@ -79,6 +100,9 @@ function defineFeaturePopup(feature, layer) {
         if (props[key]) {
             var val = props[key],
                 label = fields[key].name;
+            if (label == 'Tweet'){
+                val = val + '</br></br>';
+            }
             if (fields[key].lookup) {
                 val = fields[key].lookup[val];
             }
@@ -206,8 +230,4 @@ function serializeXmlNode(xmlNode) {
     }
     return "";
 }
-
-
-
-
 
