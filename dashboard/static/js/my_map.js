@@ -54,7 +54,7 @@ var geojson,
     metadata,
     // geojsonPath = 'traffic_accidents.geojson',
     categoryField = '5074', //This is the fieldname for marker category (used in the pie and legend)
-    iconField = '5065', //This is the fieldname for marker icon
+    iconField = '5074', //This is the fieldname for marker icon
     popupFields = ['5056','5055','5074', '5057', '5059'], //Popup will display these fields
     tileServer = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
     tileAttribution = 'Map data: <a href="http://openstreetmap.org">OSM</a>',
@@ -82,6 +82,7 @@ var sidebar = L.control.sidebar('sidebar').addTo(map);
 function defineFeature(feature, latlng) {
     var categoryVal = feature.properties[categoryField],
         iconVal = feature.properties[iconField];
+    console.log(iconVal);
     var myClass = 'marker category-'+categoryVal+' icon-'+iconVal;
     var myIcon = L.divIcon({
         className: myClass,

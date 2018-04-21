@@ -96,6 +96,18 @@
     background: #CCC;
     border-color: #444;
 }
+.category-7{
+    fill: #CCC;
+    stroke: #444;
+    background: #CCC;
+    border-color: #444;
+}
+.category-8{
+    fill: #CCC;
+    stroke: #444;
+    background: #CCC;
+    border-color: #444;
+}
 
 /*marker icons*/
 .icon-1{
@@ -114,6 +126,26 @@
     background-position: 1px 0px;
 }
 .icon-4{
+    background-image: url('car-16.png');
+    background-repeat: no-repeat;
+    background-position: 1px 0px;
+}
+.icon-5{
+    background-image: url('car-16.png');
+    background-repeat: no-repeat;
+    background-position: 1px 0px;
+}
+.icon-6{
+    background-image: url('car-16.png');
+    background-repeat: no-repeat;
+    background-position: 1px 0px;
+}
+.icon-7{
+    background-image: url('car-16.png');
+    background-repeat: no-repeat;
+    background-position: 1px 0px;
+}
+.icon-8{
     background-image: url('car-16.png');
     background-repeat: no-repeat;
     background-position: 1px 0px;
