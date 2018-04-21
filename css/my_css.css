@@ -1,0 +1,171 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #mapid {
+    height: 100%;
+    width: 100%;
+    font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#squares div {
+    /* these styles will let the divs line up next to each other
+       while accepting dimensions */
+/*
+    display: block;
+    float: left;
+*/
+
+    width: 90%;
+    height: auto;
+/*    background: blue;*/
+
+    /* a small margin to separate the blocks */
+    margin: 2px;
+}
+
+.lorem {
+    font-style: italic;
+    color: #AAA;
+}
+
+#Health .badge {
+  padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #56EAFF;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Health .badge:hover {
+  color: #ffffff;
+	background-color: #08B9D0;
+  text-decoration: none;
+  cursor: pointer;
+}
+#Business .badge {
+ padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #36FF5D;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Business .badge:hover {
+  color: #ffffff;
+	background-color: #01AF23;
+  text-decoration: none;
+  cursor: pointer;
+}
+#Technology .badge {
+ padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #FFA5F9;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Technology .badge:hover {
+  color: #ffffff;
+	background-color: #B514AB;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#News .badge {
+  padding: 5px 20px;
+  font-size: 16px;
+  color: #000000;
+  background-color: #3386FF;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#News .badge:hover {
+  color: #ffffff;
+	background-color: #0249B1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#Entertain .badge {
+ padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #FF0000;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Entertain .badge:hover {
+  color: #ffffff;
+	background-color: #8C0000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#Politics .badge {
+  padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #FF6800;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Politics .badge:hover {
+  color: #ffffff;
+	background-color: #AD4600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#Sports .badge {
+ padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #AAAAAA;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Sports .badge:hover {
+  color: #ffffff;
+	background-color: #6A6A6A;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#Event .badge {
+  padding: 5px 20px;
+  font-size: 16px;
+  white-space: nowrap;
+  color: #000000;
+  background-color: #E8CD5E;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+	margin: 2px;
+}
+#Event .badge:hover {
+  color: #ffffff;
+	background-color: #B79300;
+  text-decoration: none;
+  cursor: pointer;
+}
