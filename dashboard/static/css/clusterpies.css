@@ -31,11 +31,13 @@
 /*Marker clusters*/
 .marker-cluster-pie g.arc{
     fill-opacity: 0.5;
+    color: white !important;
 }
-.marker-cluster-pie-label {
+.marker-cluster-pie-label{
     font-size: 14px;
     font-weight: bold;
     font-family: sans-serif;
+    color: white !important;
 }
 
 /*Markers*/
@@ -51,12 +53,14 @@
     stroke: #444;
     background: #CCC;
     border-color: #444;
+    color: white !important;
 }
 .marker div{
     text-align: center;
     font-size: 14px;
     font-weight: bold;
     font-family: sans-serif;
+    color: white !important;
 }
 
 /*marker categories*/
@@ -160,6 +164,6 @@
 .map-popup span.attribute {
     display: block;
 }
-.map-popup span.label {
+.map-popup span.my_label {
     font-weight: bold;
 }

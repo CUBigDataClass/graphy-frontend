@@ -49,6 +49,12 @@ $(document).ready(function(e) {
     });
 });
 
+// var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
+//     attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+//     apikey: '<your apikey>',
+//     maxZoom: 22
+// });
+
 //Initializing the map
 var geojson,
     metadata,
@@ -57,6 +63,7 @@ var geojson,
     iconField = '5074', //This is the fieldname for marker icon
     popupFields = ['5056','5055','5074', '5057', '5059'], //Popup will display these fields
     tileServer = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+    // tileServer = 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={accessToken}',
     tileAttribution = 'Map data: <a href="http://openstreetmap.org">OSM</a>',
     rmax = 30, //Maximum radius for cluster pies
     markerclusters = L.markerClusterGroup({
@@ -69,7 +76,7 @@ var geojson,
 L.tileLayer(tileServer, {
     attribution: tileAttribution,
     maxZoom: 15,
-    id: 'mapbox.streets',
+    id: 'mapbox.dark',
     accessToken: 'pk.eyJ1IjoibGVhZmxldC10cmlhbCIsImEiOiJjajB0NDh2cW8wNWE1MzJvNWNrZGpiYnFkIn0.QeSfbOpNFdR_u4SyQSzl4A'
 }).addTo(map);
 
@@ -82,7 +89,6 @@ var sidebar = L.control.sidebar('sidebar').addTo(map);
 function defineFeature(feature, latlng) {
     var categoryVal = feature.properties[categoryField],
         iconVal = feature.properties[iconField];
-    console.log(iconVal);
     var myClass = 'marker category-'+categoryVal+' icon-'+iconVal;
     var myIcon = L.divIcon({
         className: myClass,
@@ -107,7 +113,7 @@ function defineFeaturePopup(feature, layer) {
             if (fields[key].lookup) {
                 val = fields[key].lookup[val];
             }
-            popupContent += '<span class="attribute"><span class="label">'+label+':</span> '+val+'</span>';
+            popupContent += '<span class="attribute"><span class="my_label">'+label+':</span> '+val+'</span>';
         }
     });
     popupContent = '<div class="map-popup">'+popupContent+'</div>';
@@ -190,7 +196,7 @@ function bakeThePie(options) {
         .append('svg:title')
         .text(pathTitleFunc);
 
-    vis.append('text')
+    vis.append('text')  // .attr("css", { color: "white" })
         .attr('x',origo)
         .attr('y',origo)
         .attr('class', pieLabelClass)
