@@ -227,6 +227,7 @@ function bakeThePie(options) {
         .text(pathTitleFunc);
 
     vis.append('text')  // .attr("css", { color: "white" })
+        .style('fill', 'white')
         .attr('x',origo)
         .attr('y',origo)
         .attr('class', pieLabelClass)
