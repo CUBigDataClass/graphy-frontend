@@ -1,7 +1,7 @@
 import json
 import logging
 import random
-from collections import Counter
+from collections import Counter, defaultdict
 
 from flask_cors import CORS
 from flask import Flask, render_template, request, url_for, Response
@@ -124,18 +124,26 @@ def show_all_markers():
     rows = session.execute("SELECT json * FROM tweet")
     result = []
     topic_counts = Counter()
+    trend_class_counter = defaultdict(Counter)
+    trend_classification = {}
+
     for i in rows:
         raw_json = json.loads(i.json)
 
         geo_json = geoJsonify(raw_json)
         if geo_json:
             result.append(geo_json)
-            topic_counts[inverse_topic_map[geo_json['properties']['5074']]] += 1
+            topic = inverse_topic_map[geo_json['properties']['5074']]
+            topic_counts[topic] += 1
+            trend_class_counter[geo_json['properties']['5057']][topic] += 1
+    for trend in trend_class_counter:
+        trend_classification[trend] = trend_class_counter[trend].most_common()[0][0]
 
     base_geo_json = make_base_geojson()
     base_geo_json['features'] = result
     return Response(json.dumps({'geo_json' : base_geo_json,
-                                'topic_counts' : topic_counts}),
+                                'topic_counts' : topic_counts,
+                                'trend_classification' : trend_classification}),
                     mimetype='application/json')
 
 

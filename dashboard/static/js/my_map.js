@@ -14,6 +14,7 @@
 // }).addTo(map);
 
 var topic_counts_data;
+var trend_classification;
 
 function bar_chart(topic_counts_data) {
     var keys = Object.keys(topic_counts_data);
@@ -22,7 +23,7 @@ function bar_chart(topic_counts_data) {
     for (var i = 0; i < keys.length; i++) {
         values.push(topic_counts_data[keys[i]]);
     }
-    
+
 }
 
 //Ajax call to get all markers
@@ -39,8 +40,11 @@ $(document).ready(function(e) {
         success: function(result) {
             var data = result.geo_json;
             topic_counts_data = result.topic_counts;
-            console.log(topic_counts_data);
+            trend_classification = result.trend_classification;
+
             console.log('Call successful');
+
+            //Rendering the bar chart for the first tab
             bar_chart(topic_counts_data);
 
             //Ready to go, load the geojson
