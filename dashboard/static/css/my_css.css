@@ -29,7 +29,7 @@ html, body, #mapid {
     color: #AAA;
 }
 
-#Health .badge {
+#Technology .badge {
   padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -40,13 +40,13 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Health .badge:hover {
+#Technology .badge:hover {
   color: #ffffff;
 	background-color: #08B9D0;
   text-decoration: none;
   cursor: pointer;
 }
-#Business .badge {
+#Sports .badge {
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -57,13 +57,13 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Business .badge:hover {
+#Sports .badge:hover {
   color: #ffffff;
 	background-color: #01AF23;
   text-decoration: none;
   cursor: pointer;
 }
-#Technology .badge {
+#Politics .badge {
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -74,7 +74,7 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Technology .badge:hover {
+#Politics .badge:hover {
   color: #ffffff;
 	background-color: #B514AB;
   text-decoration: none;
@@ -98,7 +98,7 @@ html, body, #mapid {
   cursor: pointer;
 }
 
-#Entertain .badge {
+#Health .badge {
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -109,14 +109,14 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Entertain .badge:hover {
+#Health .badge:hover {
   color: #ffffff;
 	background-color: #8C0000;
   text-decoration: none;
   cursor: pointer;
 }
 
-#Politics .badge {
+#Event .badge {
   padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -127,14 +127,14 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Politics .badge:hover {
+#Event .badge:hover {
   color: #ffffff;
 	background-color: #AD4600;
   text-decoration: none;
   cursor: pointer;
 }
 
-#Sports .badge {
+#Entertain .badge {
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -145,14 +145,14 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Sports .badge:hover {
+#Entertain .badge:hover {
   color: #ffffff;
 	background-color: #6A6A6A;
   text-decoration: none;
   cursor: pointer;
 }
 
-#Event .badge {
+#Business .badge {
   padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -163,7 +163,7 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Event .badge:hover {
+#Business .badge:hover {
   color: #ffffff;
 	background-color: #B79300;
   text-decoration: none;
