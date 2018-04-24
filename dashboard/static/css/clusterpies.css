@@ -33,12 +33,14 @@
     fill-opacity: 0.5;
     color: white !important;
 }
+
 .marker-cluster-pie-label{
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 600;
     font-family: sans-serif;
     color: white !important;
 }
+
 
 /*Markers*/
 .marker {

@@ -8,6 +8,10 @@ html, body, #mapid {
     font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
+text .marker-cluster-pie-label{
+	color: #FFFFFF!important
+}
+
 #squares div {
     /* these styles will let the divs line up next to each other
        while accepting dimensions */
@@ -21,12 +25,31 @@ html, body, #mapid {
 /*    background: blue;*/
 
     /* a small margin to separate the blocks */
-    margin: 2px;
+    margin: 10px;
 }
 
 .lorem {
     font-style: italic;
     color: #AAA;
+}
+
+#header {
+	padding: 5px 20px;
+	font-size: 16px;
+	white-space: nowrap;
+	color: #FFFFFF !important;
+	background-color: #000000 !important;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	border-radius: 9px;
+	margin: 2px;
+}
+
+#header:hover{
+	color: #ffffff!important;
+	background-color: #7E7E7E!important;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 #Technology .badge {
@@ -134,7 +157,7 @@ html, body, #mapid {
   cursor: pointer;
 }
 
-#Entertain .badge {
+#Entertainment .badge {
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
@@ -145,7 +168,7 @@ html, body, #mapid {
   border-radius: 9px;
 	margin: 2px;
 }
-#Entertain .badge:hover {
+#Entertainment .badge:hover {
   color: #ffffff;
 	background-color: #6A6A6A;
   text-decoration: none;
