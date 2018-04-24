@@ -23,7 +23,18 @@ function bar_chart(topic_counts_data) {
     for (var i = 0; i < keys.length; i++) {
         values.push(topic_counts_data[keys[i]]);
     }
+	
+    var data = [{
+        type: 'bar',
+        x: values,
+        y: keys,
+        marker:{
+        color:['E8CD5E','AAAAAA','FF6800','FF0000','3386FF','FFA5F9','36FF5D','56EAFF']
+        },
+        orientation: 'h'
+    }];
 
+    Plotly.newPlot('barChart', data);
 }
 
 //Ajax call to get all markers
