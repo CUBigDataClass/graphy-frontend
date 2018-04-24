@@ -1,6 +1,7 @@
 import json
 import logging
 import random
+from collections import Counter
 
 from flask_cors import CORS
 from flask import Flask, render_template, request, url_for, Response
@@ -115,18 +116,27 @@ def geoJsonify(raw_json):
 @app.route('/all_markers', methods=['GET','POST'])
 def show_all_markers():
     # full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'shovon.jpg')
+    inverse_topic_map = {'1': 'Event', '2': 'Sports', '3': 'Politics',
+                        '4': 'News', '5': 'Technology', '6': 'Business',
+                        '7': 'Entertainment', '8': 'Health'}
     cluster = Cluster()
     session = cluster.connect('graphy')
     rows = session.execute("SELECT json * FROM tweet")
     result = []
+    topic_counts = Counter()
     for i in rows:
         raw_json = json.loads(i.json)
+
         geo_json = geoJsonify(raw_json)
         if geo_json:
             result.append(geo_json)
+            topic_counts[inverse_topic_map[geo_json['properties']['5074']]] += 1
+
     base_geo_json = make_base_geojson()
     base_geo_json['features'] = result
-    return Response(json.dumps(base_geo_json), mimetype='application/json')
+    return Response(json.dumps({'geo_json' : base_geo_json,
+                                'topic_counts' : topic_counts}),
+                    mimetype='application/json')
 
 
 @app.route('/color', methods=['POST'])

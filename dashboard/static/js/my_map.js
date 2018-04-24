@@ -13,6 +13,18 @@
 //     accessToken: 'pk.eyJ1IjoibGVhZmxldC10cmlhbCIsImEiOiJjajB0NDh2cW8wNWE1MzJvNWNrZGpiYnFkIn0.QeSfbOpNFdR_u4SyQSzl4A'
 // }).addTo(map);
 
+var topic_counts_data;
+
+function bar_chart(topic_counts_data) {
+    var keys = Object.keys(topic_counts_data);
+    keys.sort();
+    var values = [];
+    for (var i = 0; i < keys.length; i++) {
+        values.push(topic_counts_data[keys[i]]);
+    }
+    
+}
+
 //Ajax call to get all markers
 $(document).ready(function(e) {
     // e.preventDefault();
@@ -25,8 +37,11 @@ $(document).ready(function(e) {
         //     access_token: $("#access_token").val()
         // },
         success: function(result) {
-            var data = result;
+            var data = result.geo_json;
+            topic_counts_data = result.topic_counts;
+            console.log(topic_counts_data);
             console.log('Call successful');
+            bar_chart(topic_counts_data);
 
             //Ready to go, load the geojson
             geojson = data;

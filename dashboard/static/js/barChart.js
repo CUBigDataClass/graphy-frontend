@@ -9,3 +9,9 @@ var data = [{
 				}];
 
 				Plotly.newPlot('barChart', data);
+
+
+
+$(document).ready(function(e) {
+    console.log(topic_counts_data);
+});
