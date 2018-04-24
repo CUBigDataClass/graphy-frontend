@@ -37,6 +37,54 @@ function bar_chart(topic_counts_data) {
     Plotly.newPlot('barChart', data);
 }
 
+function trend_badge(trend_classification, topic_counts_data){
+//		var trends = Object.keys(trend_classification);
+		
+		var topics = Object.keys(topic_counts_data);	
+    	topics.sort();
+		console.log(topics);
+		var dict = {
+			"Business": "#Business",
+			"Entertainment": "#Entertainment",
+			"Event": "#Event",
+			"Health": "#Health",
+			"News": "#News",
+			"Politics": "#Politics",
+			"Sports": "#Sports",
+			"Technology": "#Technology"
+		  
+		};
+		for( var i = 0; i<topics.length; i++){
+			var count = 0;
+			
+			$.each(trend_classification, function(key, val){
+				// This function will called for each key-val pair.
+				// You can do anything here with them.
+				if (val == topics[i]){
+					$(dict[topics[i]]).append('<span class="badge badge-warning">'+key+'</span>');
+					count++;
+				}
+				if(count >= 10){
+					return false;
+				}
+			});
+		}
+//		console.log(trend_classification[trends[0]];
+		
+		
+		$("#Health").append('<span class="badge badge-warning">Check</span>');
+		
+	
+//		for (i = 0; i < topics.length; i++) {
+//        	for (j = 0; j < trends.length; j++){
+//				if (trend_topic_dict[trends[j]] == topics[i]){
+//					document.getElementById("Health").innerHTML="Test";
+//					
+//				}
+//			}
+//    }
+}
+
 //Ajax call to get all markers
 $(document).ready(function(e) {
     // e.preventDefault();
@@ -52,11 +100,16 @@ $(document).ready(function(e) {
             var data = result.geo_json;
             topic_counts_data = result.topic_counts;
             trend_classification = result.trend_classification;
-
+			
             console.log('Call successful');
+			
+			
 
             //Rendering the bar chart for the first tab
             bar_chart(topic_counts_data);
+			
+			//Rendering the trend badge tab on the side panel
+			trend_badge(trend_classification, topic_counts_data);
 
             //Ready to go, load the geojson
             geojson = data;
@@ -92,8 +145,8 @@ var geojson,
     categoryField = '5074', //This is the fieldname for marker category (used in the pie and legend)
     iconField = '5074', //This is the fieldname for marker icon
     popupFields = ['5056','5055','5074', '5057', '5059'], //Popup will display these fields
-    tileServer = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-    // tileServer = 'https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={accessToken}',
+//    tileServer = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
+    tileServer = 'https://api.mapbox.com/styles/v1/shayonx/cjgd7zco500012sqyk222aswn/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2hheW9ueCIsImEiOiJjamdkN2V2OGwzc3BuMnduNXhiem9kYWI4In0.ii_AbJ51VHqD302XDaS2kQ',
     tileAttribution = 'Map data: <a href="http://openstreetmap.org">OSM</a>',
     rmax = 30, //Maximum radius for cluster pies
     markerclusters = L.markerClusterGroup({
@@ -106,7 +159,7 @@ var geojson,
 L.tileLayer(tileServer, {
     attribution: tileAttribution,
     maxZoom: 15,
-    id: 'mapbox.dark',
+    id: 'mapbox.satellite',
     accessToken: 'pk.eyJ1IjoibGVhZmxldC10cmlhbCIsImEiOiJjajB0NDh2cW8wNWE1MzJvNWNrZGpiYnFkIn0.QeSfbOpNFdR_u4SyQSzl4A'
 }).addTo(map);
 
@@ -227,8 +280,8 @@ function bakeThePie(options) {
         .text(pathTitleFunc);
 
     vis.append('text')  // .attr("css", { color: "white" })
-        .style('fill', 'white')
-        .attr('x',origo)
+        .style("fill", 'white')
+		.attr('x',origo)
         .attr('y',origo)
         .attr('class', pieLabelClass)
         .attr('text-anchor', 'middle')
