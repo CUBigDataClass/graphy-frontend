@@ -23,7 +23,7 @@ function bar_chart(topic_counts_data) {
     for (var i = 0; i < keys.length; i++) {
         values.push(topic_counts_data[keys[i]]);
     }
-	
+
     var data = [{
         type: 'bar',
         x: values,
@@ -39,8 +39,8 @@ function bar_chart(topic_counts_data) {
 
 function trend_badge(trend_classification, topic_counts_data){
 //		var trends = Object.keys(trend_classification);
-		
-		var topics = Object.keys(topic_counts_data);	
+
+		var topics = Object.keys(topic_counts_data);
     	topics.sort();
 		console.log(topics);
 		var dict = {
@@ -52,11 +52,11 @@ function trend_badge(trend_classification, topic_counts_data){
 			"Politics": "#Politics",
 			"Sports": "#Sports",
 			"Technology": "#Technology"
-		  
+
 		};
 		for( var i = 0; i<topics.length; i++){
 			var count = 0;
-			
+
 			$.each(trend_classification, function(key, val){
 				// This function will called for each key-val pair.
 				// You can do anything here with them.
@@ -70,16 +70,16 @@ function trend_badge(trend_classification, topic_counts_data){
 			});
 		}
 //		console.log(trend_classification[trends[0]];
-		
-		
+
+
 		$("#Health").append('<span class="badge badge-warning">Check</span>');
-		
-	
+
+
 //		for (i = 0; i < topics.length; i++) {
 //        	for (j = 0; j < trends.length; j++){
 //				if (trend_topic_dict[trends[j]] == topics[i]){
 //					document.getElementById("Health").innerHTML="Test";
-//					
+//
 //				}
 //			}
 //    }
@@ -91,7 +91,7 @@ $(document).ready(function(e) {
     // $("#main_image").attr('src', "loading.png");
     $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:5000/all_markers",
+        url: "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/all_markers",
         // data: {
         //     id: $(this).val(), // < note use of 'this' here
         //     access_token: $("#access_token").val()
@@ -100,14 +100,14 @@ $(document).ready(function(e) {
             var data = result.geo_json;
             topic_counts_data = result.topic_counts;
             trend_classification = result.trend_classification;
-			
+
             console.log('Call successful');
-			
-			
+
+
 
             //Rendering the bar chart for the first tab
             bar_chart(topic_counts_data);
-			
+
 			//Rendering the trend badge tab on the side panel
 			trend_badge(trend_classification, topic_counts_data);
 
