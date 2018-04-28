@@ -1,5 +1,5 @@
 /**
- * Created by shivendra on 05/04/18.
+ * Created by Shivendra on 05/04/18.
  */
 
 "use strict";
@@ -38,11 +38,8 @@ function bar_chart(topic_counts_data) {
 }
 
 function trend_badge(trend_classification, topic_counts_data){
-//		var trends = Object.keys(trend_classification);
-
 		var topics = Object.keys(topic_counts_data);
     	topics.sort();
-		console.log(topics);
 		var dict = {
 			"Business": "#Business",
 			"Entertainment": "#Entertainment",
@@ -52,8 +49,8 @@ function trend_badge(trend_classification, topic_counts_data){
 			"Politics": "#Politics",
 			"Sports": "#Sports",
 			"Technology": "#Technology"
-
 		};
+
 		for( var i = 0; i<topics.length; i++){
 			var count = 0;
 
@@ -69,20 +66,8 @@ function trend_badge(trend_classification, topic_counts_data){
 				}
 			});
 		}
-//		console.log(trend_classification[trends[0]];
-
 
 		$("#Health").append('<span class="badge badge-warning">Check</span>');
-
-
-//		for (i = 0; i < topics.length; i++) {
-//        	for (j = 0; j < trends.length; j++){
-//				if (trend_topic_dict[trends[j]] == topics[i]){
-//					document.getElementById("Health").innerHTML="Test";
-//
-//				}
-//			}
-//    }
 }
 
 //Ajax call to get all markers
@@ -92,6 +77,7 @@ $(document).ready(function(e) {
     $.ajax({
         type: "GET",
         url: "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/all_markers",
+        // url: "http://127.0.0.1:5000/all_markers",
         // data: {
         //     id: $(this).val(), // < note use of 'this' here
         //     access_token: $("#access_token").val()
@@ -124,6 +110,7 @@ $(document).ready(function(e) {
             map.setZoom(3);
             // renderLegend();
 
+            $("#loader_page").hide();
 
         },
         error: function(result) {
@@ -209,9 +196,9 @@ function defineClusterIcon(cluster) {
         strokeWidth = 1, //Set clusterpie stroke width
         r = rmax-2*strokeWidth-(n<10?12:n<100?8:n<1000?4:0), //Calculate clusterpie radius...
         iconDim = (r+strokeWidth)*2, //...and divIcon dimensions (leaflet really want to know the size)
-        data = d3.nest() //Build a dataset for the pie chart
+        data = d3v5.nest() //Build a dataset for the pie chart
             .key(function(d) { return d.feature.properties[categoryField]; })
-            .entries(children, d3.map),
+            .entries(children, d3v5.map),
     //bake some svg markup
         html = bakeThePie({data: data,
             valueFunc: function(d){return d.values.length;},
@@ -247,20 +234,20 @@ function bakeThePie(options) {
         pathClassFunc = options.pathClassFunc?options.pathClassFunc:function(){return '';}, //Class for each path
         pathTitleFunc = options.pathTitleFunc?options.pathTitleFunc:function(){return '';}, //Title for each path
         pieClass = options.pieClass?options.pieClass:'marker-cluster-pie', //Class for the whole pie
-        pieLabel = options.pieLabel?options.pieLabel:d3.sum(data,valueFunc), //Label for the whole pie
+        pieLabel = options.pieLabel?options.pieLabel:d3v5.sum(data,valueFunc), //Label for the whole pie
         pieLabelClass = options.pieLabelClass?options.pieLabelClass:'marker-cluster-pie-label',//Class for the pie label
 
         origo = (r+strokeWidth), //Center coordinate
         w = origo*2, //width and height of the svg element
         h = w,
-        donut = d3.pie(),
-        arc = d3.arc().innerRadius(rInner).outerRadius(r);
+        donut = d3v5.pie(),
+        arc = d3v5.arc().innerRadius(rInner).outerRadius(r);
 
 
     //Create an svg element
-    var svg = document.createElementNS(d3.namespaces.svg, 'svg');
+    var svg = document.createElementNS(d3v5.namespaces.svg, 'svg');
     //Create the pie chart
-    var vis = d3.select(svg)
+    var vis = d3v5.select(svg)
         .data([data])
         .attr('class', pieClass)
         .attr('width', w)
@@ -295,8 +282,8 @@ function bakeThePie(options) {
 
 /*Function for generating a legend with the same categories as in the clusterPie*/
 function renderLegend() {
-    var data = d3.entries(metadata.fields[categoryField].lookup),
-        legenddiv = d3.select('body').append('div')
+    var data = d3v5.entries(metadata.fields[categoryField].lookup),
+        legenddiv = d3v5.select('body').append('div')
             .attr('id','legend');
     console.log(data);
 
@@ -321,4 +308,111 @@ function serializeXmlNode(xmlNode) {
     }
     return "";
 }
+
+
+//Ajax call to get trend graph
+$(document).ready(function(e) {
+
+    $.ajax({
+        type: "GET",
+        url: "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/trend_graph",
+        // url: "http://127.0.0.1:5000/trend_graph",
+        success: function(result) {
+            console.log(result);
+            var graph = result;
+            // requirejs.config({
+            //     waitSeconds: 0,
+            //     paths: {
+            //         d3_v3: 'assets/js/d3_v3'
+            //     }
+            // });
+            //
+            // requirejs( ["d3_v3"], function(d3) {
+                var width = 960,
+                    height = 500;
+
+                var color = d3v3.scale.category20();
+
+                //var force = d3.layout.force()
+                //    .charge(-120)
+                //    .linkDistance(30)
+                //    .size([width, height]);
+                var force = d3v3.layout.force()
+                    .gravity(0.05)
+                    .distance(100)
+                    .charge(-100)
+                    .size([width, height]);
+
+
+                // var gb = GroupInABox(force, "");
+
+                var svg = d3v3.select("#messages").append("svg")
+                    .attr("width", width)
+                    .attr("height", height);
+
+
+
+                    force
+                        .nodes(graph.nodes)
+                        .links(graph.links)
+                        .start();
+
+                    var link = svg.selectAll(".link")
+                        .data(graph.links)
+                        .enter().append("line")
+                        .attr("class", "link")
+                        .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+                    var node = svg.selectAll(".node")
+                        .data(graph.nodes)
+                        .enter().append("circle")
+                        .attr("class", "node")
+                        .attr("r", 5)
+                        .call(force.drag);
+
+                    node.append("title")
+                        .text(function(d) { return d.name; });
+
+                    var texts  = svg.selectAll(".texts")
+                        .data(graph.nodes)
+                        .enter()
+                        .append("text")
+                        .attr("dx", 12)
+                        .attr("dy", "0.35em")
+                        .text(function(d){ return d.name; });
+                    //      .call(force.drag);
+                    //      .attr("font-size", function(d){ return d.influence*1.5>9? d.influence*1.5: 9; })
+
+
+                    force.on("tick", function() {
+                        link.attr("x1", function(d) { return d.source.x; })
+                            .attr("y1", function(d) { return d.source.y; })
+                            .attr("x2", function(d) { return d.target.x; })
+                            .attr("y2", function(d) { return d.target.y; });
+
+                        node.attr("cx", function(d) { return d.x; })
+                            .attr("cy", function(d) { return d.y; });
+
+                        texts.attr("x", function(d) { return d.x; })
+                            .attr("y", function(d) { return d.y; });
+                    });
+
+                    d3v3.select("#clusterButton").on("click", function () {
+                        netClustering.cluster(graph.nodes, graph.links);
+
+                        svg.selectAll(".node").transition().duration(500).style("fill", function(d) { return color(d.cluster); });
+                    });
+
+            // });
+                $( "#messages" ).click(function() {
+                    console.log("Messages Clicked");
+                    $("#sidebar").css("width", "900px");
+                });
+
+        },
+        error: function(result) {
+            console.log("Something went wrong");
+        }
+    });
+});
 
