@@ -4,7 +4,9 @@
 
 "use strict";
 
-var base_url = "";
+var local_base_url = "http://127.0.0.1:5000/";
+var aws_base_url = "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/";
+var base_url = aws_base_url;
 
 var topic_counts_data;
 var trend_classification;
@@ -65,16 +67,12 @@ function trend_badge(trend_classification, topic_counts_data){
 
 //Ajax call to get all markers
 $(document).ready(function(e) {
-    // e.preventDefault();
-    // $("#main_image").attr('src', "loading.png");
+
     $.ajax({
         type: "GET",
-        url: "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/all_markers",
-        // url: "http://127.0.0.1:5000/all_markers",
-        // data: {
-        //     id: $(this).val(), // < note use of 'this' here
-        //     access_token: $("#access_token").val()
-        // },
+
+        url: base_url + "all_markers",
+
         success: function(result) {
             var data = result.geo_json;
             topic_counts_data = result.topic_counts;
@@ -112,11 +110,6 @@ $(document).ready(function(e) {
     });
 });
 
-// var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
-//     attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-//     apikey: '<your apikey>',
-//     maxZoom: 22
-// });
 
 //Initializing the map
 var geojson,
@@ -308,36 +301,21 @@ $(document).ready(function(e) {
 
     $.ajax({
         type: "GET",
-        url: "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/trend_graph",
-        // url: "http://127.0.0.1:5000/trend_graph",
+        url: base_url + "trend_graph",
+
         success: function(result) {
-            console.log(result);
             var graph = result;
-            // requirejs.config({
-            //     waitSeconds: 0,
-            //     paths: {
-            //         d3_v3: 'assets/js/d3_v3'
-            //     }
-            // });
-            //
-            // requirejs( ["d3_v3"], function(d3) {
+
                 var width = 960,
                     height = 500;
 
                 var color = d3v3.scale.category20();
 
-                //var force = d3.layout.force()
-                //    .charge(-120)
-                //    .linkDistance(30)
-                //    .size([width, height]);
                 var force = d3v3.layout.force()
-                    .gravity(0.5)
-                    .distance(200)
-                    .charge(-600)
+                    .linkDistance(250)
+                    .charge(-200)
                     .size([width, height]);
 
-
-                // var gb = GroupInABox(force, "");
 
                 var svg = d3v3.select("#messages").append("svg")
                     .attr("width", width)
@@ -397,7 +375,6 @@ $(document).ready(function(e) {
                         svg.selectAll(".node").transition().duration(500).style("fill", function(d) { return color(d.cluster); });
                     });
 
-            // });
                 $( "#cluster_tab" ).click(function() {
                     console.log("cluster_tab  Clicked");
                     $("#sidebar").css("width", "900px");
