@@ -4,14 +4,7 @@
 
 "use strict";
 
-// var map = L.map('mapid').setView([40.0150, -105.2705], 13);
-//
-// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-//     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-//     maxZoom: 30,
-//     id: 'mapbox.streets',
-//     accessToken: 'pk.eyJ1IjoibGVhZmxldC10cmlhbCIsImEiOiJjajB0NDh2cW8wNWE1MzJvNWNrZGpiYnFkIn0.QeSfbOpNFdR_u4SyQSzl4A'
-// }).addTo(map);
+var base_url = "";
 
 var topic_counts_data;
 var trend_classification;
@@ -338,9 +331,9 @@ $(document).ready(function(e) {
                 //    .linkDistance(30)
                 //    .size([width, height]);
                 var force = d3v3.layout.force()
-                    .gravity(0.05)
-                    .distance(100)
-                    .charge(-100)
+                    .gravity(0.5)
+                    .distance(200)
+                    .charge(-600)
                     .size([width, height]);
 
 
@@ -348,7 +341,8 @@ $(document).ready(function(e) {
 
                 var svg = d3v3.select("#messages").append("svg")
                     .attr("width", width)
-                    .attr("height", height);
+                    .attr("height", height)
+                    .attr("align", "left");
 
 
 
@@ -361,13 +355,13 @@ $(document).ready(function(e) {
                         .data(graph.links)
                         .enter().append("line")
                         .attr("class", "link")
-                        .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+                        .style("stroke-width", function(d) { return 0.5; });
 
                     var node = svg.selectAll(".node")
                         .data(graph.nodes)
                         .enter().append("circle")
                         .attr("class", "node")
-                        .attr("r", 5)
+                        .attr("r", 7)
                         .call(force.drag);
 
                     node.append("title")
@@ -404,10 +398,14 @@ $(document).ready(function(e) {
                     });
 
             // });
-                $( "#messages" ).click(function() {
-                    console.log("Messages Clicked");
+                $( "#cluster_tab" ).click(function() {
+                    console.log("cluster_tab  Clicked");
                     $("#sidebar").css("width", "900px");
                 });
+            $( "#collapse" ).click(function() {
+                console.log("Collapse Clicked");
+                $("#sidebar").css("width", "");
+            });
 
         },
         error: function(result) {
