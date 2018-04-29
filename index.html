@@ -26,8 +26,10 @@
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
                 <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+                <li><a href="#sentiment_bar" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li><a href="#sentiment_main" role="tab"><i class="fa fa-user"></i></a></li>
                 <li><a id="cluster_tab" href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
-                <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+
             </ul>
 
             <ul role="tablist">
@@ -37,6 +39,9 @@
 
         <!-- Tab panes -->
         <div class="sidebar-content">
+
+
+            <!--Topic bar chart-->
             <div class="sidebar-pane" id="home">
                 <h1 class="sidebar-header"> Graphy <span class="sidebar-close"><em class="fa fa-caret-left"></em></span> </h1>
                 <p>This tab shows the number of Tweets corresponding to the Topics displayed.</p>
@@ -47,9 +52,10 @@
 
             </div>
 
+
+            <!--Trend classification side bar-->
             <div class="sidebar-pane" id="profile">
                 <h1 class="sidebar-header">Trends<span class="sidebar-close"><em class="fa fa-caret-left"></em></span></h1>
-
                 <!-- Sidebar Trends -->
                 <div id="squares">
                     <div id="Health"><a id="header" class="badge badge-danger">Health</a><br></div>
@@ -61,15 +67,31 @@
                     <div id="Sports"><a id="header" class="badge">Sports</a><br></div>
                     <div id="Event"><a id="header" class="badge">Event</a><br></div>
                 </div>​
-
             </div>
 
+
+            <!--Sentiment bar chart-->
+            <div class="sidebar-pane" id="sentiment_bar">
+                <h1 class="sidebar-header"> Sentiment <span class="sidebar-close"><em class="fa fa-caret-left"></em></span> </h1>
+                <p>This tab shows the number of Tweets corresponding to the Sentiment displayed.</p>
+
+                <div id="sentiment_bar_chart" style="width: 400px; height: 600px;">
+                    <!-- Plotly chart will be drawn inside this DIV -->
+                </div>
+            </div>
+
+            <!--Trend sentiment side bar-->
+            <!--TODO-->
+
+
+            <!--Trend similarity side bar-->
             <div class="sidebar-pane" id="messages">
                 <h1 class="sidebar-header">Trend Similarity<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
                 <button id="clusterButton" type="button">Cluster</button>
                 <button id="collapse" type="button">Collapse</button>
             </div>
 
+            <!--Settings side bar - currently empty-->
             <div class="sidebar-pane" id="settings">
                 <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
             </div>
@@ -100,14 +122,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="assets/js/leaflet-providers.js"></script>
-    <!--<script src="assets/js/require.js"></script>-->
-    <!--<script type='text/javascript' src="assets/js/d3v3.min.js"></script>-->
     <script type='text/javascript' src='assets/js/my_map.js'></script>
     <script src="assets/js/barChart.js"></script>
     <script type="text/javascript" src="assets/js/netClustering.js">   </script>
     <!--<script type='text/javascript' src='js/traffic_accident_json_data.js'></script>-->
-    <!--<script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>-->
-    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
-</body>
+   </body>
 
 </html>

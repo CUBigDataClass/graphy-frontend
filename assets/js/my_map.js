@@ -10,7 +10,33 @@ var base_url = aws_base_url;
 
 var topic_counts_data;
 var trend_classification;
+var sentiment_counts_data;
+var trend_sentiment;
 
+//Function to plot sentiment bar chart
+function sentiment_bar_chart(sentiment_counts_data) {
+    var keys = Object.keys(sentiment_counts_data);
+    keys.sort();
+    var values = [];
+    for (var i = 0; i < keys.length; i++) {
+        values.push(sentiment_counts_data[keys[i]]);
+    }
+
+    var data = [{
+        type: 'bar',
+        x: values,
+        y: keys,
+        marker:{
+            color:['E8CD5E','AAAAAA','FF6800','FF0000','3386FF','FFA5F9','36FF5D','56EAFF']
+        },
+        orientation: 'h'
+    }];
+
+    Plotly.newPlot('sentiment_bar_chart', data);
+}
+
+
+//Function to plot topic bar chart
 function bar_chart(topic_counts_data) {
     var keys = Object.keys(topic_counts_data);
     keys.sort();
@@ -32,6 +58,8 @@ function bar_chart(topic_counts_data) {
     Plotly.newPlot('barChart', data);
 }
 
+
+//Function to display trend topic badges
 function trend_badge(trend_classification, topic_counts_data){
 		var topics = Object.keys(topic_counts_data);
     	topics.sort();
@@ -65,6 +93,7 @@ function trend_badge(trend_classification, topic_counts_data){
 		$("#Health").append('<span class="badge badge-warning">Check</span>');
 }
 
+
 //Ajax call to get all markers
 $(document).ready(function(e) {
 
@@ -77,16 +106,20 @@ $(document).ready(function(e) {
             var data = result.geo_json;
             topic_counts_data = result.topic_counts;
             trend_classification = result.trend_classification;
+            sentiment_counts_data = result.sentiment_counts;
+            trend_sentiment = result.trend_sentiment;
 
             console.log('Call successful');
 
-
-
-            //Rendering the bar chart for the first tab
+            //Rendering the bar chart for the 1st tab
             bar_chart(topic_counts_data);
 
-			//Rendering the trend badge tab on the side panel
+			//Rendering the 2nd tab (trend badge tab)
 			trend_badge(trend_classification, topic_counts_data);
+
+            //Rendering the sentiment bar chart for the 3rd tab
+            sentiment_bar_chart(sentiment_counts_data);
+
 
             //Ready to go, load the geojson
             geojson = data;
@@ -312,8 +345,8 @@ $(document).ready(function(e) {
                 var color = d3v3.scale.category20();
 
                 var force = d3v3.layout.force()
-                    .linkDistance(250)
-                    .charge(-200)
+                    .linkDistance(200)
+                    .charge(-1000)
                     .size([width, height]);
 
 
