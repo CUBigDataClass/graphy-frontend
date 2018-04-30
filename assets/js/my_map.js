@@ -6,7 +6,7 @@
 
 var local_base_url = "http://127.0.0.1:5000/";
 var aws_base_url = "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/";
-var base_url = local_base_url;
+var base_url = aws_base_url;
 
 var topic_counts_data;
 var trend_classification;
