@@ -340,7 +340,7 @@ $(document).ready(function(e) {
             var graph = result;
 
                 var width = 960,
-                    height = 500;
+                    height = 700;
 
                 var color = d3v3.scale.category20();
 
