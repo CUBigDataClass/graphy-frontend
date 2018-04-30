@@ -12,27 +12,58 @@ var topic_counts_data;
 var trend_classification;
 var sentiment_counts_data;
 var trend_sentiment;
-
+$('#sidebar').hide()
 //Function to plot sentiment bar chart
 function sentiment_bar_chart(sentiment_counts_data) {
     var keys = Object.keys(sentiment_counts_data);
     keys.sort();
-    var values = [];
+    var values = ['Tweets by sentiment'];
     for (var i = 0; i < keys.length; i++) {
         values.push(sentiment_counts_data[keys[i]]);
     }
 
-    var data = [{
-        type: 'bar',
-        x: values,
-        y: keys,
-        marker:{
-            color:['E8CD5E','AAAAAA','FF6800','FF0000','3386FF','FFA5F9','36FF5D','56EAFF']
+    var colors = ['a94442','rgb(243, 125, 4)','rgb(243, 243, 1)','rgb(5, 179, 5)','#337ab7'];
+    var chart = c3.generate({
+        size: { height: 600, width: 380},
+        bindto: '#sentiment_bar_chart',
+        padding: {
+            top: 40,
+            right: 10,
+            bottom: 0,
+            left: 80,
         },
-        orientation: 'h'
-    }];
+        data: {
+            columns: [
+                values,
+            ],
+            types: {
+                'Tweets by sentiment': 'bar',
+            },
+            color: function(inColor, data) {
+                if(data.index !== undefined) {
+                  return colors[data.index]
+                }
+          
+                return inColor;
+              },
+        },
+        axis: {
+            rotated: true,
+            x: {
+                type: 'category',
+                categories: keys,
+                tick: {
+                    rotate: 180,
+                    multiline: false
+                },
 
-    Plotly.newPlot('sentiment_bar_chart', data);
+            }
+        },
+        legend: {
+            show: false
+        }
+    });
+
 }
 
 
@@ -47,7 +78,7 @@ function bar_chart(topic_counts_data) {
     }
     var colors = ['a94442','rgb(243, 125, 4)','rgb(243, 243, 1)','rgb(5, 179, 5)','#337ab7'];
     var chart = c3.generate({
-        size: { height: 600, width: 320},
+        size: { height: 600, width: 380},
         bindto: '#barChart',
         padding: {
             top: 40,
@@ -95,11 +126,8 @@ function trend_badge(trend_classification, topic_counts_data){
 		var topics = Object.keys(topic_counts_data);
     	topics.sort();
 		var dict = {
-			"Business": "#Business",
+			"Mood": "#Mood",
 			"Entertainment": "#Entertainment",
-			"Event": "#Event",
-			"Health": "#Health",
-			"News": "#News",
 			"Politics": "#Politics",
 			"Sports": "#Sports",
 			"Technology": "#Technology"
@@ -166,6 +194,7 @@ $(document).ready(function(e) {
             // renderLegend();
 
             $("#loader_page").hide();
+            $("#sidebar").show();
 
         },
         error: function(result) {

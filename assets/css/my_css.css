@@ -56,8 +56,8 @@ text .marker-cluster-pie-label{
   padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
-  color: #000000;
-  background-color: #56EAFF;
+  color: #fff;
+  background-color: #337ab7;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
@@ -65,7 +65,7 @@ text .marker-cluster-pie-label{
 }
 #Technology .badge:hover {
   color: #ffffff;
-	background-color: #08B9D0;
+	background-color: #337ab7;
   text-decoration: none;
   cursor: pointer;
 }
@@ -73,16 +73,33 @@ text .marker-cluster-pie-label{
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
-  color: #000000;
-  background-color: #36FF5D;
+  color: #fff;
+  background-color: rgb(5, 179, 5);
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
 	margin: 2px;
 }
+#Mood .badge {
+  padding: 5px 20px;
+   font-size: 16px;
+   white-space: nowrap;
+   color: #fff;
+   background-color: rgb(243, 125, 4);
+   -webkit-border-radius: 9px;
+   -moz-border-radius: 9px;
+   border-radius: 9px;
+   margin: 2px;
+ }
+ #Mood .badge:hover {
+  color: #ffffff;
+	background-color: rgb(243, 125, 4);
+  text-decoration: none;
+  cursor: pointer;
+}
 #Sports .badge:hover {
   color: #ffffff;
-	background-color: #01AF23;
+	background-color: rgb(5, 179, 5);
   text-decoration: none;
   cursor: pointer;
 }
@@ -90,69 +107,16 @@ text .marker-cluster-pie-label{
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
-  color: #000000;
-  background-color: #FFA5F9;
+  color: #000;
+  background-color: rgb(243, 243, 1);
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
 	margin: 2px;
 }
 #Politics .badge:hover {
-  color: #ffffff;
-	background-color: #B514AB;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#News .badge {
-  padding: 5px 20px;
-  font-size: 16px;
-  color: #000000;
-  background-color: #3386FF;
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
-	margin: 2px;
-}
-#News .badge:hover {
-  color: #ffffff;
-	background-color: #0249B1;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#Health .badge {
- padding: 5px 20px;
-  font-size: 16px;
-  white-space: nowrap;
-  color: #000000;
-  background-color: #FF0000;
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
-	margin: 2px;
-}
-#Health .badge:hover {
-  color: #ffffff;
-	background-color: #8C0000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#Event .badge {
-  padding: 5px 20px;
-  font-size: 16px;
-  white-space: nowrap;
-  color: #000000;
-  background-color: #FF6800;
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
-	margin: 2px;
-}
-#Event .badge:hover {
-  color: #ffffff;
-	background-color: #AD4600;
+  color: #000;
+	background-color: rgb(243, 243, 1);
   text-decoration: none;
   cursor: pointer;
 }
@@ -161,34 +125,16 @@ text .marker-cluster-pie-label{
  padding: 5px 20px;
   font-size: 16px;
   white-space: nowrap;
-  color: #000000;
-  background-color: #AAAAAA;
+  color: #fff;
+  background-color: #a94442;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
 	margin: 2px;
 }
 #Entertainment .badge:hover {
-  color: #ffffff;
-	background-color: #6A6A6A;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#Business .badge {
-  padding: 5px 20px;
-  font-size: 16px;
-  white-space: nowrap;
-  color: #000000;
-  background-color: #E8CD5E;
-  -webkit-border-radius: 9px;
-  -moz-border-radius: 9px;
-  border-radius: 9px;
-	margin: 2px;
-}
-#Business .badge:hover {
-  color: #ffffff;
-	background-color: #B79300;
+  color: #fff;
+  background-color: #a94442;
   text-decoration: none;
   cursor: pointer;
 }
