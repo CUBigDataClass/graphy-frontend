@@ -22,7 +22,7 @@ function sentiment_bar_chart(sentiment_counts_data) {
         values.push(sentiment_counts_data[keys[i]]);
     }
 
-    var colors = ['a94442','rgb(243, 125, 4)','rgb(243, 243, 1)','rgb(5, 179, 5)','#337ab7'];
+    // var colors = ['a94442','rgb(243, 125, 4)','rgb(243, 243, 1)','rgb(5, 179, 5)','#337ab7'];
     var chart = c3.generate({
         size: { height: 600, width: 380},
         bindto: '#sentiment_bar_chart',
@@ -41,7 +41,7 @@ function sentiment_bar_chart(sentiment_counts_data) {
             },
             color: function(inColor, data) {
                 if(data.index !== undefined) {
-                  return colors[data.index]
+                //   return colors[data.index]
                 }
           
                 return inColor;
