@@ -6,7 +6,7 @@
 
 var local_base_url = "http://127.0.0.1:5000/";
 var aws_base_url = "http://a0789c979482c11e89703062872d6ca9-501906506.us-west-2.elb.amazonaws.com/";
-var base_url = aws_base_url;
+var base_url = local_base_url;
 
 var topic_counts_data;
 var trend_classification;
@@ -150,7 +150,7 @@ var geojson,
     // geojsonPath = 'traffic_accidents.geojson',
     categoryField = '5074', //This is the fieldname for marker category (used in the pie and legend)
     iconField = '5074', //This is the fieldname for marker icon
-    popupFields = ['5056','5055','5074', '5057', '5059'], //Popup will display these fields
+    popupFields = ['5056','5055','5074', '5065', '5057', '5059'], //Popup will display these fields
 //    tileServer = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
     tileServer = 'https://api.mapbox.com/styles/v1/shayonx/cjgd7zco500012sqyk222aswn/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2hheW9ueCIsImEiOiJjamdkN2V2OGwzc3BuMnduNXhiem9kYWI4In0.ii_AbJ51VHqD302XDaS2kQ',
     tileAttribution = 'Map data: <a href="http://openstreetmap.org">OSM</a>',
