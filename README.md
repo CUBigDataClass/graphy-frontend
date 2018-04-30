@@ -21,6 +21,10 @@ We are using Machine Learning models to parse through the tweets and classify th
 - [Docker](https://www.docker.com/)
 - [Twitter API](https://developer.twitter.com/)
 
+## Logo
+
+[Network by Barracuda from the Noun Project](https://thenounproject.com/search/?q=network&i=739907)
+
 ## License
 
 MIT © Graphy
