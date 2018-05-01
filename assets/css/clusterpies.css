@@ -67,33 +67,33 @@
 
 /*marker categories*/
 .category-1{
-    fill: #F88;
+    fill: #a94442;
     stroke: #800;
-    background: #F88;
+    background: #a94442;
     border-color: #800;
 }
 .category-2{
-    fill: #FA0;
+    fill: rgb(243, 125, 4);
     stroke: #B60;
-    background: #FA0;
+    background: rgb(243, 125, 4);
     border-color: #B60;
 }
 .category-3{
-    fill: #FF3;
+    fill: rgb(243, 243, 1);
     stroke: #D80;
-    background: #FF3;
+    background: rgb(243, 243, 1);
     border-color: #D80;
 }
 .category-4{
-    fill: #BFB;
+    fill: rgb(5, 179, 5);
     stroke: #070;
-    background: #BFB;
+    background: rgb(5, 179, 5);
     border-color: #070;
 }
 .category-5{
-    fill: #9DF;
+    fill: #337ab7;
     stroke: #007;
-    background: #9DF;
+    background: #337ab7;
     border-color: #007;
 }
 .category-6{
