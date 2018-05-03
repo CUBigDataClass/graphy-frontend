@@ -20,6 +20,12 @@ We are using Machine Learning models to parse through the tweets and classify th
 - [Cassandra](http://cassandra.apache.org/)
 - [Docker](https://www.docker.com/)
 - [Twitter API](https://developer.twitter.com/)
+- [Kubernetes](https://kubernetes.io/)
+- [D3](https://d3js.org/)
+
+## Infrastructure
+
+Check out our [infrastructure repository](https://github.com/CUBigDataClass/graphy-kubernetes) and our [backend repository](https://github.com/CUBigDataClass/graphy-backend). 
 
 ## Logo
 
